@@ -1,5 +1,5 @@
-var Util = require('../core/Util');
-var DiagonalMovement = require('../core/DiagonalMovement');
+import { biBacktrace } from '../core/Util';
+import { Never, OnlyWhenNoObstacles, IfAtMostOneObstacle } from '../core/DiagonalMovement';
 
 /**
  * Bi-directional Breadth-First-Search path finder.
@@ -19,12 +19,12 @@ function BiBreadthFirstFinder(opt) {
 
     if (!this.diagonalMovement) {
         if (!this.allowDiagonal) {
-            this.diagonalMovement = DiagonalMovement.Never;
+            this.diagonalMovement = Never;
         } else {
             if (this.dontCrossCorners) {
-                this.diagonalMovement = DiagonalMovement.OnlyWhenNoObstacles;
+                this.diagonalMovement = OnlyWhenNoObstacles;
             } else {
-                this.diagonalMovement = DiagonalMovement.IfAtMostOneObstacle;
+                this.diagonalMovement = IfAtMostOneObstacle;
             }
         }
     }
@@ -73,7 +73,7 @@ BiBreadthFirstFinder.prototype.findPath = function(startX, startY, endX, endY, g
                 // if this node has been inspected by the reversed search,
                 // then a path is found.
                 if (neighbor.by === BY_END) {
-                    return Util.biBacktrace(node, neighbor);
+                    return biBacktrace(node, neighbor);
                 }
                 continue;
             }
@@ -97,7 +97,7 @@ BiBreadthFirstFinder.prototype.findPath = function(startX, startY, endX, endY, g
             }
             if (neighbor.opened) {
                 if (neighbor.by === BY_START) {
-                    return Util.biBacktrace(neighbor, node);
+                    return biBacktrace(neighbor, node);
                 }
                 continue;
             }
@@ -112,4 +112,4 @@ BiBreadthFirstFinder.prototype.findPath = function(startX, startY, endX, endY, g
     return [];
 };
 
-module.exports = BiBreadthFirstFinder;
+export default BiBreadthFirstFinder;

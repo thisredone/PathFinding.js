@@ -1,7 +1,7 @@
-var Heap       = require('heap');
-var Util       = require('../core/Util');
-var Heuristic  = require('../core/Heuristic');
-var DiagonalMovement = require('../core/DiagonalMovement');
+import Heap from 'heap';
+import { backtrace } from '../core/Util';
+import { manhattan, octile } from '../core/Heuristic';
+import { Never, OnlyWhenNoObstacles, IfAtMostOneObstacle } from '../core/DiagonalMovement';
 
 /**
  * A* path-finder. Based upon https://github.com/bgrins/javascript-astar
@@ -21,28 +21,28 @@ function AStarFinder(opt) {
     opt = opt || {};
     this.allowDiagonal = opt.allowDiagonal;
     this.dontCrossCorners = opt.dontCrossCorners;
-    this.heuristic = opt.heuristic || Heuristic.manhattan;
+    this.heuristic = opt.heuristic || manhattan;
     this.weight = opt.weight || 1;
     this.diagonalMovement = opt.diagonalMovement;
 
     if (!this.diagonalMovement) {
         if (!this.allowDiagonal) {
-            this.diagonalMovement = DiagonalMovement.Never;
+            this.diagonalMovement = Never;
         } else {
             if (this.dontCrossCorners) {
-                this.diagonalMovement = DiagonalMovement.OnlyWhenNoObstacles;
+                this.diagonalMovement = OnlyWhenNoObstacles;
             } else {
-                this.diagonalMovement = DiagonalMovement.IfAtMostOneObstacle;
+                this.diagonalMovement = IfAtMostOneObstacle;
             }
         }
     }
 
     // When diagonal movement is allowed the manhattan heuristic is not
     //admissible. It should be octile instead
-    if (this.diagonalMovement === DiagonalMovement.Never) {
-        this.heuristic = opt.heuristic || Heuristic.manhattan;
+    if (this.diagonalMovement === Never) {
+        this.heuristic = opt.heuristic || manhattan;
     } else {
-        this.heuristic = opt.heuristic || Heuristic.octile;
+        this.heuristic = opt.heuristic || octile;
     }
 }
 
@@ -79,7 +79,7 @@ AStarFinder.prototype.findPath = function(startX, startY, endX, endY, grid) {
 
         // if reached the end position, construct the path and return it
         if (node === endNode) {
-            return Util.backtrace(endNode);
+            return backtrace(endNode);
         }
 
         // get neigbours of the current node
@@ -123,4 +123,4 @@ AStarFinder.prototype.findPath = function(startX, startY, endX, endY, grid) {
     return [];
 };
 
-module.exports = AStarFinder;
+export default AStarFinder;

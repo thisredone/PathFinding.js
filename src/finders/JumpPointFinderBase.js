@@ -1,10 +1,10 @@
 /**
  * @author imor / https://github.com/imor
  */
-var Heap       = require('heap');
-var Util       = require('../core/Util');
-var Heuristic  = require('../core/Heuristic');
-var DiagonalMovement = require('../core/DiagonalMovement');
+import Heap from 'heap';
+import { expandPath, backtrace } from '../core/Util';
+import { manhattan, octile } from '../core/Heuristic';
+import DiagonalMovement from '../core/DiagonalMovement';
 
 /**
  * Base class for the Jump Point Search algorithm
@@ -14,7 +14,7 @@ var DiagonalMovement = require('../core/DiagonalMovement');
  */
 function JumpPointFinderBase(opt) {
     opt = opt || {};
-    this.heuristic = opt.heuristic || Heuristic.manhattan;
+    this.heuristic = opt.heuristic || manhattan;
     this.trackJumpRecursion = opt.trackJumpRecursion || false;
 }
 
@@ -48,7 +48,7 @@ JumpPointFinderBase.prototype.findPath = function(startX, startY, endX, endY, gr
         node.closed = true;
 
         if (node === endNode) {
-            return Util.expandPath(Util.backtrace(endNode));
+            return expandPath(backtrace(endNode));
         }
 
         this._identifySuccessors(node);
@@ -91,7 +91,7 @@ JumpPointFinderBase.prototype._identifySuccessors = function(node) {
             }
 
             // include distance, as parent may not be immediately adjacent:
-            d = Heuristic.octile(abs(jx - x), abs(jy - y));
+            d = octile(abs(jx - x), abs(jy - y));
             ng = node.g + d; // next `g` value
 
             if (!jumpNode.opened || ng < jumpNode.g) {
@@ -111,4 +111,4 @@ JumpPointFinderBase.prototype._identifySuccessors = function(node) {
     }
 };
 
-module.exports = JumpPointFinderBase;
+export default JumpPointFinderBase;

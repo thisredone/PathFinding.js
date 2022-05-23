@@ -1,7 +1,7 @@
-var Heap       = require('heap');
-var Util       = require('../core/Util');
-var Heuristic  = require('../core/Heuristic');
-var DiagonalMovement = require('../core/DiagonalMovement');
+import Heap from 'heap';
+import { biBacktrace } from '../core/Util';
+import { manhattan, octile } from '../core/Heuristic';
+import { Never, OnlyWhenNoObstacles, IfAtMostOneObstacle } from '../core/DiagonalMovement';
 
 /**
  * A* path-finder.
@@ -23,27 +23,27 @@ function BiAStarFinder(opt) {
     this.allowDiagonal = opt.allowDiagonal;
     this.dontCrossCorners = opt.dontCrossCorners;
     this.diagonalMovement = opt.diagonalMovement;
-    this.heuristic = opt.heuristic || Heuristic.manhattan;
+    this.heuristic = opt.heuristic || manhattan;
     this.weight = opt.weight || 1;
 
     if (!this.diagonalMovement) {
         if (!this.allowDiagonal) {
-            this.diagonalMovement = DiagonalMovement.Never;
+            this.diagonalMovement = Never;
         } else {
             if (this.dontCrossCorners) {
-                this.diagonalMovement = DiagonalMovement.OnlyWhenNoObstacles;
+                this.diagonalMovement = OnlyWhenNoObstacles;
             } else {
-                this.diagonalMovement = DiagonalMovement.IfAtMostOneObstacle;
+                this.diagonalMovement = IfAtMostOneObstacle;
             }
         }
     }
 
     //When diagonal movement is allowed the manhattan heuristic is not admissible
     //It should be octile instead
-    if (this.diagonalMovement === DiagonalMovement.Never) {
-        this.heuristic = opt.heuristic || Heuristic.manhattan;
+    if (this.diagonalMovement === Never) {
+        this.heuristic = opt.heuristic || manhattan;
     } else {
-        this.heuristic = opt.heuristic || Heuristic.octile;
+        this.heuristic = opt.heuristic || octile;
     }
 }
 
@@ -97,7 +97,7 @@ BiAStarFinder.prototype.findPath = function(startX, startY, endX, endY, grid) {
                 continue;
             }
             if (neighbor.opened === BY_END) {
-                return Util.biBacktrace(node, neighbor);
+                return biBacktrace(node, neighbor);
             }
 
             x = neighbor.x;
@@ -142,7 +142,7 @@ BiAStarFinder.prototype.findPath = function(startX, startY, endX, endY, grid) {
                 continue;
             }
             if (neighbor.opened === BY_START) {
-                return Util.biBacktrace(neighbor, node);
+                return biBacktrace(neighbor, node);
             }
 
             x = neighbor.x;
@@ -178,4 +178,4 @@ BiAStarFinder.prototype.findPath = function(startX, startY, endX, endY, grid) {
     return [];
 };
 
-module.exports = BiAStarFinder;
+export default BiAStarFinder;
