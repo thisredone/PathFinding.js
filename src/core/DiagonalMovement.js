@@ -1,8 +1,11 @@
-var DiagonalMovement = {
-    Always: 1,
-    Never: 2,
-    IfAtMostOneObstacle: 3,
-    OnlyWhenNoObstacles: 4
-};
+const Always=  1;
+const Never = 2;
+const IfAtMostOneObstacle = 3;
+const OnlyWhenNoObstacles =  4;
 
-export default DiagonalMovement;
+export {
+    Always,
+    Never,
+    IfAtMostOneObstacle,
+    OnlyWhenNoObstacles
+};

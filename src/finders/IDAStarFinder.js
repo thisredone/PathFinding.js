@@ -1,7 +1,7 @@
-import Util from '../core/Util';
-import { manhattan, octile } from '../core/Heuristic';
-import Node from '../core/Node';
-import { Never, OnlyWhenNoObstacles, IfAtMostOneObstacle } from '../core/DiagonalMovement';
+import Util from '../core/Util.js';
+import { manhattan, octile } from '../core/Heuristic.js';
+import Node from '../core/Node.js';
+import { Never, OnlyWhenNoObstacles, IfAtMostOneObstacle } from '../core/DiagonalMovement.js';
 
 /**
  * Iterative Deeping A Star (IDA*) path-finder.

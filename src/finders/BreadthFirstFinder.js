@@ -1,5 +1,5 @@
-import { backtrace } from '../core/Util';
-import { Never, OnlyWhenNoObstacles, IfAtMostOneObstacle } from '../core/DiagonalMovement';
+import { backtrace } from '../core/Util.js';
+import { Never, OnlyWhenNoObstacles, IfAtMostOneObstacle } from '../core/DiagonalMovement.js';
 
 /**
  * Breadth-First-Search path finder.

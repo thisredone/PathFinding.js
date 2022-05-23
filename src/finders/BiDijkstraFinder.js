@@ -1,4 +1,4 @@
-import BiAStarFinder from './BiAStarFinder';
+import BiAStarFinder from './BiAStarFinder.js';
 
 /**
  * Bi-directional Dijkstra path-finder.

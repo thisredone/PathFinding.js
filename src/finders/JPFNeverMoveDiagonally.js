@@ -1,8 +1,8 @@
 /**
  * @author imor / https://github.com/imor
  */
-import JumpPointFinderBase from './JumpPointFinderBase';
-import { Never } from '../core/DiagonalMovement';
+import JumpPointFinderBase from './JumpPointFinderBase.js';
+import { Never } from '../core/DiagonalMovement.js';
 
 /**
  * Path finder using the Jump Point Search algorithm allowing only horizontal

@@ -1,7 +1,7 @@
 import Heap from 'heap';
-import { biBacktrace } from '../core/Util';
-import { manhattan, octile } from '../core/Heuristic';
-import { Never, OnlyWhenNoObstacles, IfAtMostOneObstacle } from '../core/DiagonalMovement';
+import { biBacktrace } from '../core/Util.js';
+import { manhattan, octile } from '../core/Heuristic.js';
+import { Never, OnlyWhenNoObstacles, IfAtMostOneObstacle } from '../core/DiagonalMovement.js';
 
 /**
  * A* path-finder.

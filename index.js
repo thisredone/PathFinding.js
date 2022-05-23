@@ -1,1 +1,3 @@
-export * from "./src/PathFinding";
+import * as PathFinding from "./src/PathFinding.js";
+
+export default PathFinding;

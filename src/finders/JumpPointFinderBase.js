@@ -2,9 +2,9 @@
  * @author imor / https://github.com/imor
  */
 import Heap from 'heap';
-import { expandPath, backtrace } from '../core/Util';
-import { manhattan, octile } from '../core/Heuristic';
-import DiagonalMovement from '../core/DiagonalMovement';
+import { expandPath, backtrace } from '../core/Util.js';
+import { manhattan, octile } from '../core/Heuristic.js';
+import DiagonalMovement from '../core/DiagonalMovement.js';
 
 /**
  * Base class for the Jump Point Search algorithm

@@ -1,11 +1,11 @@
 /**
  * @author aniero / https://github.com/aniero
  */
-import { Never, Always, OnlyWhenNoObstacles } from '../core/DiagonalMovement';
-import JPFNeverMoveDiagonally from './JPFNeverMoveDiagonally';
-import JPFAlwaysMoveDiagonally from './JPFAlwaysMoveDiagonally';
-import JPFMoveDiagonallyIfNoObstacles from './JPFMoveDiagonallyIfNoObstacles';
-import JPFMoveDiagonallyIfAtMostOneObstacle from './JPFMoveDiagonallyIfAtMostOneObstacle';
+import { Never, Always, OnlyWhenNoObstacles } from '../core/DiagonalMovement.js';
+import JPFNeverMoveDiagonally from './JPFNeverMoveDiagonally.js';
+import JPFAlwaysMoveDiagonally from './JPFAlwaysMoveDiagonally.js';
+import JPFMoveDiagonallyIfNoObstacles from './JPFMoveDiagonallyIfNoObstacles.js';
+import JPFMoveDiagonallyIfAtMostOneObstacle from './JPFMoveDiagonallyIfAtMostOneObstacle.js';
 
 /**
  * Path finder using the Jump Point Search algorithm

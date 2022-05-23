@@ -1,5 +1,5 @@
-import { biBacktrace } from '../core/Util';
-import { Never, OnlyWhenNoObstacles, IfAtMostOneObstacle } from '../core/DiagonalMovement';
+import { biBacktrace } from '../core/Util.js';
+import { Never, OnlyWhenNoObstacles, IfAtMostOneObstacle } from '../core/DiagonalMovement.js';
 
 /**
  * Bi-directional Breadth-First-Search path finder.
