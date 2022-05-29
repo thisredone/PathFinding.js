@@ -1,4 +1,4 @@
-import Heap from 'heap';
+import Heap from '../core/Heap.js';
 import { backtrace } from '../core/Util.js';
 import { manhattan, octile } from '../core/Heuristic.js';
 import { Never, OnlyWhenNoObstacles, IfAtMostOneObstacle } from '../core/DiagonalMovement.js';

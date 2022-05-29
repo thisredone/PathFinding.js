@@ -1,10 +1,10 @@
-import Heap                       from 'heap';
-import * as Node                       from './core/Node.js';
-import * as Grid                       from './core/Grid.js';
+import Heap                       from './core/Heap.js';
+import Node                      from './core/Node.js';
+import Grid                      from './core/Grid.js';
 import * as Util                       from './core/Util.js';
 import * as DiagonalMovement           from './core/DiagonalMovement.js';
 import * as Heuristic                  from './core/Heuristic.js';
-import * as AStarFinder                from './finders/AStarFinder.js';
+import AStarFinder                from './finders/AStarFinder.js';
 import * as BestFirstFinder            from './finders/BestFirstFinder.js';
 import * as BreadthFirstFinder         from './finders/BreadthFirstFinder.js';
 import * as DijkstraFinder             from './finders/DijkstraFinder.js';

@@ -15,9 +15,8 @@
   ],
   "author": "Xueqiao Xu <xueqiaoxu@gmail.com>",
   "main": "./index.js",
-  "dependencies": {
-    "heap": "0.2.5"
-  },
+  "dependencies": {},
+  "type": "module",
   "devDependencies": {
     "colors": "^1.0.3",
     "del": "^0.1.3",
