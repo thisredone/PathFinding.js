@@ -103,6 +103,8 @@ AStarFinder.prototype.findPath = function(startX, startY, endX, endY, grid) {
 
             let neighborOpened = neighbor.opened === queryId;
 
+            if (!neighborOpened) neighbor.h = null;
+
             // check if the neighbor has not been inspected yet, or
             // can be reached with smaller cost from the current node
             if (!neighborOpened || ng < neighbor.g) {
