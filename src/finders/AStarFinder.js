@@ -9,7 +9,7 @@ import { Never, OnlyWhenNoObstacles, IfAtMostOneObstacle } from '../core/Diagona
  * @param {Object} opt
  * @param {boolean} opt.allowDiagonal Whether diagonal movement is allowed.
  *     Deprecated, use diagonalMovement instead.
- * @param {boolean} opt.dontCrossCorners Disallow diagonal movement touching 
+ * @param {boolean} opt.dontCrossCorners Disallow diagonal movement touching
  *     block corners. Deprecated, use diagonalMovement instead.
  * @param {DiagonalMovement} opt.diagonalMovement Allowed diagonal movement.
  * @param {function} opt.heuristic Heuristic function to estimate the distance
@@ -67,19 +67,22 @@ AStarFinder.prototype.findPath = function(startX, startY, endX, endY, grid) {
     startNode.g = 0;
     startNode.f = 0;
 
+    const queryId = performance.now();
+
     // push the start node into the open list
     openList.push(startNode);
-    startNode.opened = true;
+    startNode.opened = queryId;
 
     // while the open list is not empty
     while (!openList.empty()) {
         // pop the position of node which has the minimum `f` value.
         node = openList.pop();
-        node.closed = true;
+        node.closed = queryId;
 
         // if reached the end position, construct the path and return it
         if (node === endNode) {
-            return backtrace(endNode);
+            // return backtrace(endNode);
+            return endNode;
         }
 
         // get neigbours of the current node
@@ -87,7 +90,7 @@ AStarFinder.prototype.findPath = function(startX, startY, endX, endY, grid) {
         for (i = 0, l = neighbors.length; i < l; ++i) {
             neighbor = neighbors[i];
 
-            if (neighbor.closed) {
+            if (neighbor.closed === queryId) {
                 continue;
             }
 
@@ -98,17 +101,19 @@ AStarFinder.prototype.findPath = function(startX, startY, endX, endY, grid) {
             // and calculate the next g score
             ng = node.g + ((x - node.x === 0 || y - node.y === 0) ? 1 : SQRT2);
 
+            let neighborOpened = neighbor.opened === queryId;
+
             // check if the neighbor has not been inspected yet, or
             // can be reached with smaller cost from the current node
-            if (!neighbor.opened || ng < neighbor.g) {
+            if (!neighborOpened || ng < neighbor.g) {
                 neighbor.g = ng;
                 neighbor.h = neighbor.h || weight * heuristic(abs(x - endX), abs(y - endY));
                 neighbor.f = neighbor.g + neighbor.h;
                 neighbor.parent = node;
 
-                if (!neighbor.opened) {
+                if (!neighborOpened) {
                     openList.push(neighbor);
-                    neighbor.opened = true;
+                    neighbor.opened = queryId;
                 } else {
                     // the neighbor can be reached with smaller cost.
                     // Since its f value has been updated, we have to
@@ -120,7 +125,8 @@ AStarFinder.prototype.findPath = function(startX, startY, endX, endY, grid) {
     } // end while not open list empty
 
     // fail to find the path
-    return [];
+    // return [];
+    return false;
 };
 
 export default AStarFinder;
